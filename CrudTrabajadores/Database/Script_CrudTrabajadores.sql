@@ -1,0 +1,12 @@
+CREATE DATABASE CrudTrabajadores;
+GO
+
+USE CrudTrabajadores;
+GO
+
+CREATE TABLE Trabajadores (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(100) NOT NULL,
+    Cargo NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100) NOT NULL
+);

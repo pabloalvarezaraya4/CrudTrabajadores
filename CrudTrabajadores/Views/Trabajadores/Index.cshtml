@@ -1,0 +1,111 @@
+﻿@model IEnumerable<CrudTrabajadores.Models.Trabajador>
+
+<h2>Lista de Trabajadores</h2>
+
+<p>
+    <button class="btn btn-primary" onclick="openCreateModal()">Nuevo Trabajador</button>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cargo</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model)
+        {
+            <tr>
+                <td>@t.Nombre</td>
+                <td>@t.Cargo</td>
+                <td>@t.Email</td>
+                <td>
+                    <button class="btn btn-warning" onclick="openEditModal(@t.Id)">Editar</button>
+                    <button class="btn btn-danger" onclick="openDeleteModal(@t.Id)">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Editar Trabajador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body" id="editModalBody">
+                <!-- Aquí se cargará el formulario -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Crear -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nuevo Trabajador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body" id="createModalBody"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Eliminar -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar Trabajador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body" id="deleteModalBody"></div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        function openEditModal(id) {
+            fetch(`/Trabajadores/Edit/${id}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("editModalBody").innerHTML = html;
+                    new bootstrap.Modal(document.getElementById('editModal')).show();
+                });
+        }
+
+        function openCreateModal() {
+            fetch(`/Trabajadores/Create`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("createModalBody").innerHTML = html;
+                    new bootstrap.Modal(document.getElementById('createModal')).show();
+                });
+        }
+
+        function openDeleteModal(id) {
+            fetch(`/Trabajadores/Delete/${id}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("deleteModalBody").innerHTML = html;
+                    new bootstrap.Modal(document.getElementById('deleteModal')).show();
+                });
+        }
+
+    </script>
+}
+
+
