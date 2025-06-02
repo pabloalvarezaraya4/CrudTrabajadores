@@ -1,3 +1,5 @@
+https://imgur.com/gallery/crud-de-trabajadores-asp-net-core-mvc-lvWofSQ
+
 # CRUD de Trabajadores - ASP.NET Core MVC
 
 Este proyecto es una aplicación web desarrollada en Visual Studio 2022 utilizando ASP.NET Core MVC, Entity Framework Core y SQL Server. Permite gestionar trabajadores mediante operaciones CRUD (Crear, Leer, Editar, Eliminar), con interfaz moderna basada en Bootstrap 5 y uso de modales.
